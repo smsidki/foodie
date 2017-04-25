@@ -79,6 +79,7 @@ local.properties
 .classpath
 .settings/
 .loadpath
+.recommenders/
 
 # External tool builders
 .externalToolBuilders/
@@ -101,3 +102,9 @@ derby.log
 ######################
 
 .factorypath
+
+######################
+# Sonar
+######################
+
+.sonarlint/
