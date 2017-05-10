@@ -1,33 +1,43 @@
 package com.greenfoarfece.foodie.main;
 
+import java.util.Date;
+
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.greenfoarfece.foodie.main.config.BaseConfiguration;
-import com.greenfoarfece.foodie.main.dao.UserDao;
 import com.greenfoarfece.foodie.main.entity.User;
+import com.greenfoarfece.foodie.main.enumeration.Role;
 import com.greenfoarfece.foodie.main.service.UserService;
 
 public class App {
-
-	private static ApplicationContext ctx;
-
+	
 	public static void main(String[] args) {
-		
-		ctx = new AnnotationConfigApplicationContext(BaseConfiguration.class);
+		ApplicationContext ctx = new AnnotationConfigApplicationContext(BaseConfiguration.class);
 		UserService svc = (UserService) ctx.getBean("userService");
-		UserDao dao = (UserDao) ctx.getBean("userDao");
-		User user = svc.getUser();
-		User user2 = dao.find(5);
-		
-		System.out.println(user.getId());
-		System.out.println(user.getUserName());
-		System.out.println(user.getPassword());
-		
-		System.out.println(user2.getId());
-		System.out.println(user2.getUserName());
-		System.out.println(user2.getPassword());
-		
+		Date current = new Date();
+		User user = User.builder()
+						.createdBy("Sidki")
+						.createdOn(current)
+						.lastUpdatedBy("Sidki")
+						.lastUpdatedOn(current)
+						.password("aP455w0rd")
+						.role(Role.ADMIN)
+						.userName("Sidki")
+						.build();
+		svc.insert(user);
+		System.out.println(svc.getUser((long) 1).toString());
+		User userUpdate = svc.getUser((long) 1);
+		userUpdate.setLastUpdatedBy("Sayid Updated");
+		userUpdate.setLastUpdatedOn(new Date());
+		svc.update(userUpdate);
+		System.out.println(svc.getUser((long) 1).toString());
+		svc.delete((long) 1);
+		System.out.println(svc.getUserIncludeDeleted((long) 1).getStatus());
+		svc.deletePermanently(svc.getUserIncludeDeleted((long) 1));
+		System.out.println(svc.getUserIncludeDeleted((long) 1));
+		((ConfigurableApplicationContext) ctx).close();
 	}
 	
 }

@@ -9,4 +9,12 @@
 	</parent>
 	<artifactId>foodie-main</artifactId>
 	<name>main</name>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.greenfoarfece.foodie</groupId>
+			<artifactId>foodie-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>
