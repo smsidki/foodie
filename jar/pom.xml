@@ -11,20 +11,39 @@
 	<packaging>pom</packaging>
 	<name>jar</name>
 	<modules>
+		<module>../common</module>
 		<module>../main</module>
 		<module>../report</module>
 	</modules>
-	
+
 	<properties>
 		<springframework.version>4.0.6.RELEASE</springframework.version>
+		<hibernate.version>4.3.6.Final</hibernate.version>
 	</properties>
-	
+
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<!-- Hibernate -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<!-- Oracle JDBC -->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0</version>
 		</dependency>
 	</dependencies>
 </project>
