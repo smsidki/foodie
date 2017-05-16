@@ -11,7 +11,7 @@ import com.greenfoarfece.foodie.main.service.UserService;
 public class UserServiceImpl implements UserService {
 	
 	@Autowired
-	UserDao userDao;
+	private UserDao userDao;
 
 	@Override
 	public User getUser() {
